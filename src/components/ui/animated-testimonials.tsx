@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence, cubicBezier } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { Quote, Star, ArrowLeft, ArrowRight} from 'lucide-react';
+import { Quote, Star, ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from "next/image";
 
 const testimonials = [
@@ -197,10 +197,6 @@ function PremiumTestimonials() {
                     className="text-center mb-20"
                     variants={fadeInUp}
                 >
-                    <motion.div
-                    >
-                    </motion.div>
-
                     <motion.h2
                         className="text-4xl sm:text-6xl md:text-7xl font-bold mb-8 tracking-tight"
                         variants={fadeInUp}
@@ -292,6 +288,8 @@ function PremiumTestimonials() {
                                                     <Image
                                                         src={testimonials[currentIndex].avatar}
                                                         alt={testimonials[currentIndex].name}
+                                                        width={96}
+                                                        height={96}
                                                         className="w-full h-full object-cover"
                                                     />
                                                     <motion.div
