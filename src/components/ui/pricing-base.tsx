@@ -162,10 +162,7 @@ export default function Pricing() {
                         className="text-center text-4xl font-semibold lg:text-6xl tracking-tight"
                         variants={fadeInUp}
                     >
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-                            Наші
-                        </span>
-                        <br />
+                        <span className="text-white">Наші </span>
                         <motion.span
                             className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-rose-300"
                             animate={{
