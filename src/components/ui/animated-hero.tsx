@@ -28,8 +28,19 @@ function Hero() {
 
     return (
         <div className="w-full relative min-h-screen flex items-center justify-center overflow-hidden">
-            {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden">
+            {/* Background Image */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{
+                    backgroundImage: `url(/background.jpg)`,
+                }}
+            />
+
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/50" />
+
+            {/* Animated background elements (optional - можна видалити) */}
+            <div className="absolute inset-0 overflow-hidden opacity-30">
                 <motion.div
                     animate={{
                         scale: [1, 1.2, 1],

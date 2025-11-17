@@ -1,125 +1,109 @@
-﻿interface MenuItem {
-    title: string;
-    links: {
-        text: string;
-        url: string;
-    }[];
-}
+﻿import React from "react";
+import { Code, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 
-interface FooterProps {
-    logo?: {
-        url: string;
-        src: string;
-        alt: string;
-        title: string;
-    };
-    tagline?: string;
-    menuItems?: MenuItem[];
-    copyright?: string;
-    bottomLinks?: {
-        text: string;
-        url: string;
-    }[];
-}
-
-const Footer = ({
-                    logo = {
-                        src: "https://www.shadcnblocks.com/images/block/block-1.svg",
-                        alt: "blocks for shadcn/ui",
-                        title: "Our Web Studio Lemoners",
-                        url: "https://www.shadcnblocks.com",
-                    },
-                    menuItems = [
-                        {
-                            title: "Product",
-                            links: [
-                                { text: "Overview", url: "#" },
-                                { text: "Pricing", url: "#" },
-                                { text: "Marketplace", url: "#" },
-                                { text: "Features", url: "#" },
-                                { text: "Integrations", url: "#" },
-                            ],
-                        },
-                        {
-                            title: "Company",
-                            links: [
-                                { text: "About", url: "#" },
-                                { text: "Team", url: "#" },
-                                { text: "Blog", url: "#" },
-                                { text: "Careers", url: "#" },
-                            ],
-                        },
-                        {
-                            title: "Resources",
-                            links: [
-                                { text: "Help", url: "#" },
-                                { text: "Sales", url: "#" },
-                                { text: "Advertise", url: "#" },
-                            ],
-                        },
-                        {
-                            title: "Social",
-                            links: [
-                                { text: "Twitter", url: "#" },
-                                { text: "Instagram", url: "#" },
-                                { text: "LinkedIn", url: "#" },
-                            ],
-                        },
-                    ],
-                    copyright = "© 2024 Copyright. All rights reserved.",
-                    bottomLinks = [
-                        { text: "Terms and Conditions", url: "#" },
-                        { text: "Privacy Policy", url: "#" },
-                    ],
-                }: FooterProps) => {
+export default function Footer() {
     return (
-        <section className="py-16 bg-background">
-            <div className="container mx-auto px-4">
-                <footer>
-                    <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6">
-                        <div className="col-span-2 mb-8 lg:mb-0">
-                            <div className="flex items-center gap-2">
-                                <a href={logo.url}>
-                                    <img
-                                        src={logo.src}
-                                        alt={logo.alt}
-                                        title={logo.title}
-                                        className="h-8"
-                                    />
-                                </a>
-                                <p className="text-lg font-semibold">{logo.title}</p>
+        <footer className="border-t border-white/10 py-12 px-6">
+            <div className="max-w-7xl mx-auto">
+                <div className="grid md:grid-cols-4 gap-12 mb-12">
+                    <div className="md:col-span-2">
+                        <div className="flex items-center gap-2 mb-4">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
+                                <Code className="w-6 h-6 text-white" />
                             </div>
+                            <span className="text-2xl font-bold text-white">Lemoners</span>
                         </div>
-                        {menuItems.map((section, sectionIdx) => (
-                            <div key={sectionIdx}>
-                                <h3 className="mb-3 text-sm font-bold">{section.title}</h3>
-                                <ul className="space-y-2 text-sm text-muted-foreground">
-                                    {section.links.map((link, linkIdx) => (
-                                        <li
-                                            key={linkIdx}
-                                            className="font-medium hover:text-primary transition-colors"
-                                        >
-                                            <a href={link.url}>{link.text}</a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+                        <p className="text-gray-400 leading-relaxed max-w-md">
+                            Ми створюємо сучасні веб-рішення, які допомагають бізнесу рости та розвиватися в цифровому світі.
+                        </p>
                     </div>
-                    <div className="mt-12 flex flex-col justify-between gap-4 border-t pt-6 text-sm text-muted-foreground md:flex-row md:items-center">
-                        <p>{copyright}</p>
-                        <ul className="flex gap-4">
-                            {bottomLinks.map((link, linkIdx) => (
-                                <li key={linkIdx} className="hover:text-primary transition-colors">
-                                    <a href={link.url}>{link.text}</a>
-                                </li>
-                            ))}
+
+                    <div>
+                        <h4 className="text-white font-semibold mb-4">Послуги</h4>
+                        <ul className="space-y-2">
+                            <li>
+                                <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    Веб-розробка
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    UI/UX Дизайн
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    Лендінги
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    Підтримка
+                                </a>
+                            </li>
                         </ul>
                     </div>
-                </footer>
-            </div>
-        </section>
-    );
-};
 
-export { Footer };
+                    <div>
+                        <h4 className="text-white font-semibold mb-4">Компанія</h4>
+                        <ul className="space-y-2">
+                            <li>
+                                <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    Про нас
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#portfolio" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    Портфоліо
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#contact" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    Контакти
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                                    Блог
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-gray-400 text-sm">
+                        © 2024 Lemoners. Всі права захищені.
+                    </p>
+
+                    <div className="flex items-center gap-4">
+                        <a
+                            href="#"
+                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                        >
+                            <Facebook className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                        </a>
+                        <a
+                            href="#"
+                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                        >
+                            <Instagram className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                        </a>
+                        <a
+                            href="#"
+                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                        >
+                            <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                        </a>
+                        <a
+                            href="#"
+                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                        >
+                            <Twitter className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    );
+}
