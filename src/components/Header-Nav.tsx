@@ -1,64 +1,32 @@
-﻿// components/ui/navbar/demo.tsx
-"use client"
+﻿"use client"
 
-import * as React from "react"
-import { Header, Button } from "@/components/ui/navbar"
-import { User } from "lucide-react"
+import { Button, Header } from "@/components/ui/navbar"
 
 const menuItems = [
     {
-        text: "Menu 1",
+        text: "Послуги",
         items: [
-            {
-                text: "Submenu 1.1",
-                description: "Description for submenu 1.1",
-                to: "/menu1/submenu1",
-            },
-            {
-                text: "Submenu 1.2",
-                description: "Description for submenu 1.2",
-                to: "/menu1/submenu2",
-            }
-        ]
+            { text: "Веб-розробка", description: "Сучасні сайти та додатки", to: "/services/web" },
+            { text: "Дизайн", description: "UI/UX дизайн", to: "/services/design" },
+            { text: "Маркетинг", description: "Просування бізнесу", to: "/services/marketing" },
+        ],
     },
-    {
-        text: "Menu 2",
-        to: "/menu2"
-    },
-    {
-        text: "Menu 3",
-        items: [
-            {
-                text: "Submenu 3.1",
-                description: "Description for submenu 3.1",
-                to: "/menu3/submenu1",
-            },
-            {
-                text: "Submenu 3.2",
-                description: "Description for submenu 3.2",
-                to: "/menu3/submenu2",
-            }
-        ]
-    }
+    { text: "Портфоліо", to: "/portfolio" },
+    { text: "Про нас", to: "/about" },
+    { text: "Контакти", to: "/contact" },
 ]
 
-export const HeaderNav = () => {
+export default function HeaderNav() {
     return (
-        <div className="w-full bg-[#0B0C0F] min-h-[200px]">
-            <Header
-                theme="dark"
-                logo={<span className="text-xl font-bold text-white">Lemoners</span>}
-                menuItems={menuItems}
-                rightContent={
-                    <Button
-                        variant="outline"
-                        className="text-white"
-                    >
-                        <User className="mr-2 h-4 w-4" />
-                        Button 1
-                    </Button>
-                }
-            />
-        </div>
+        <Header
+            logo="/logo-lemoners.jpg"
+            logoSize="lg"
+            menuItems={menuItems}
+            rightContent={
+                <div className="flex items-center gap-x-2">
+                    <Button className="text-xs">Розпочати</Button>
+                </div>
+            }
+        />
     )
 }

@@ -1,8 +1,8 @@
 ﻿"use client"
 
 import * as React from "react"
+import Image from 'next/image'
 import clsx from 'clsx'
-import Image from "next/image"
 
 interface NavButton {
     className?: string
@@ -11,27 +11,27 @@ interface NavButton {
     onClick?: () => void
 }
 
-const Button: React.FC<NavButton> = ({
-                                         className,
-                                         children,
-                                         variant = 'default',
-                                         onClick
-                                     }) => {
+const Button: React.FC<NavButton> = React.memo(({
+                                                    className,
+                                                    children,
+                                                    variant = 'default',
+                                                    onClick
+                                                }) => {
     return (
         <button
             onClick={onClick}
             className={clsx(
-                'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+                'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2',
                 'disabled:pointer-events-none disabled:opacity-50',
-                'h-10 px-4 py-2',
+                'h-9 px-4',
                 variant === 'default' && [
-                    'bg-black text-white hover:bg-black/90',
-                    'dark:bg-white dark:text-black dark:hover:bg-white/90'
+                    'bg-gradient-to-r from-purple-600 to-blue-600 text-white',
+                    'hover:from-purple-700 hover:to-blue-700 hover:shadow-lg hover:shadow-purple-500/25',
                 ],
                 variant === 'outline' && [
-                    'border border-current',
-                    'hover:bg-black/10 dark:hover:bg-white/10'
+                    'border border-gray-600 text-gray-300',
+                    'hover:border-purple-400 hover:text-white hover:bg-gray-800/50',
                 ],
                 className
             )}
@@ -39,16 +39,14 @@ const Button: React.FC<NavButton> = ({
             {children}
         </button>
     )
-}
+})
+
+Button.displayName = 'Button'
 
 interface NavItem {
     to?: string
     text: string
     items?: {
-        icon?: {
-            dark: string
-            light: string
-        }
         text: string
         description?: string
         to: string
@@ -57,192 +55,209 @@ interface NavItem {
 
 interface HeaderProps {
     className?: string
-    theme?: 'light' | 'dark'
-    isSticky?: boolean
-    isStickyOverlay?: boolean
-    withBorder?: boolean
-    logo?: React.ReactNode
+    logo?: React.ReactNode | string
+    logoSize?: 'sm' | 'md' | 'lg'
     menuItems?: NavItem[]
-    onThemeChange?: () => void
     rightContent?: React.ReactNode
 }
 
-const ChevronIcon = () => (
+const ChevronIcon = React.memo(() => (
     <svg
         width="10"
         height="6"
         viewBox="0 0 10 6"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-2.5 opacity-60 [&_path]:stroke-2"
+        className="w-2.5 opacity-60 transition-transform duration-200 group-hover:rotate-180"
     >
         <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
-)
+))
 
-const Navigation: React.FC<{ isDarkTheme?: boolean; items: NavItem[] }> = ({ isDarkTheme, items }) => (
-    <nav>
-        <ul className="flex gap-x-10 xl:gap-x-8 lg:gap-x-6">
-            {items.map(({ to, text, items }, index) => {
-                const Tag = to ? 'a' : 'button'
-                const hasItems = items && items.length > 0
+ChevronIcon.displayName = 'ChevronIcon'
 
-                return (
-                    <li
-                        className={clsx('relative [perspective:2000px]', hasItems && 'group')}
-                        key={index}
-                    >
-                        <Tag
-                            className={clsx(
-                                'flex items-center gap-x-1 whitespace-pre text-sm',
-                                isDarkTheme ? 'text-white' : 'text-black dark:text-white'
-                            )}
-                            href={to}
-                        >
-                            {text}
-                            {hasItems && <ChevronIcon />}
-                        </Tag>
-                        {hasItems && (
-                            <div
-                                className={clsx(
-                                    'absolute -left-5 top-full w-[300px] pt-5',
-                                    'pointer-events-none opacity-0',
-                                    'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
-                                    'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
-                                )}
-                            >
-                                <ul
-                                    className={clsx(
-                                        'relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border p-2.5',
-                                        'dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
-                                        isDarkTheme
-                                            ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
-                                            : 'border-gray-200 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]'
-                                    )}
-                                >
-                                    {items.map(({ icon, text, description, to }, index) => (
-                                        <li key={index}>
-                                            <a
-                                                className={clsx(
-                                                    'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2',
-                                                    'before:absolute before:inset-0 before:z-10 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
-                                                    isDarkTheme
-                                                        ? 'text-white before:bg-[#16181D]'
-                                                        : 'text-black before:bg-[#f5f5f5]'
-                                                )}
-                                                href={to}
-                                            >
-                                                {icon && (
-                                                    <div
-                                                        className={clsx(
-                                                            'relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border',
-                                                            isDarkTheme
-                                                                ? 'border-[#2E3038] bg-[#16181D]'
-                                                                : 'border-gray-200 bg-[#F5F5F5]'
-                                                        )}
-                                                    >
-                                                        <Image
-                                                            className="h-5 w-5"
-                                                            src={isDarkTheme ? icon.dark : icon.light}
-                                                            width={20}
-                                                            height={20}
-                                                            loading="lazy"
-                                                            alt=""
-                                                            aria-hidden
-                                                        />
-                                                    </div>
-                                                )}
-                                                <div className="relative z-10 ml-3">
-                                                    <span className="block text-sm font-medium">{text}</span>
-                                                    {description && (
-                                                        <span
-                                                            className={clsx(
-                                                                'mt-0.5 block text-sm',
-                                                                isDarkTheme ? 'text-gray-400' : 'text-gray-500'
-                                                            )}
-                                                        >
-                                                            {description}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+interface NavItemProps {
+    to?: string
+    text: string
+    hasItems: boolean
+    subItems?: NavItem['items']
+}
+
+const NavItemComponent = React.memo(({ to, text, hasItems, subItems }: NavItemProps) => {
+    const Tag = to ? 'a' : 'button'
+
+    return (
+        <li className="relative group">
+            <Tag
+                className={clsx(
+                    'flex items-center gap-x-1.5 py-3 text-sm font-medium',
+                    'text-gray-300 transition-colors duration-200',
+                    'hover:text-white',
+                    'bg-no-repeat bg-bottom bg-gradient-to-r from-purple-400 to-blue-400',
+                    'hover:bg-[length:100%_2px] bg-[length:0_2px]',
+                    'transition-all'
+                )}
+                href={to}
+            >
+                {text}
+                {hasItems && <ChevronIcon />}
+            </Tag>
+            {hasItems && subItems && (
+                <div
+                    className={clsx(
+                        'absolute -left-3 top-full w-56 pt-3',
+                        'pointer-events-none opacity-0',
+                        'origin-top-left transition-all duration-200 [transform:rotateX(-15deg)_scale(0.95)_translateY(-8px)]',
+                        'group-hover:pointer-events-auto group-hover:opacity-100 group-hover:[transform:none]'
+                    )}
+                >
+                    <ul
+                        className={clsx(
+                            'flex flex-col gap-y-1 rounded-lg border border-gray-700 bg-gray-900/95 p-2 shadow-xl',
+                            'backdrop-blur-md'
                         )}
-                    </li>
-                )
-            })}
+                    >
+                        {subItems.map(({ text: itemText, description, to: itemTo }, idx) => (
+                            <li key={idx}>
+                                <a
+                                    className={clsx(
+                                        'block rounded-md px-3 py-2 transition-colors duration-150',
+                                        'text-gray-200 hover:bg-gray-800 hover:text-white',
+                                        'text-sm'
+                                    )}
+                                    href={itemTo}
+                                >
+                                    <span className="font-medium">{itemText}</span>
+                                    {description && (
+                                        <div className="mt-1 text-xs text-gray-400">
+                                            {description}
+                                        </div>
+                                    )}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+        </li>
+    )
+})
+
+NavItemComponent.displayName = 'NavItemComponent'
+
+const Navigation = React.memo(({ items }: { items: NavItem[] }) => (
+    <nav className="hidden lg:block flex-1">
+        <ul className="flex justify-center gap-x-8">
+            {items.map(({ to, text, items: subItems }, index) => (
+                <NavItemComponent
+                    key={index}
+                    to={to}
+                    text={text}
+                    hasItems={!!(subItems && subItems.length > 0)}
+                    subItems={subItems}
+                />
+            ))}
         </ul>
     </nav>
-)
+))
 
-const MobileMenuButton: React.FC<{ onClick: () => void; isDarkTheme?: boolean }> = ({
-                                                                                        onClick,
-                                                                                        isDarkTheme,
-                                                                                    }) => (
+Navigation.displayName = 'Navigation'
+
+const MobileMenuButton = React.memo(({ onClick }: { onClick: () => void }) => (
     <button
         className={clsx(
-            'lg:hidden',
-            'relative h-8 w-8',
-            isDarkTheme ? 'text-white' : 'text-black dark:text-white'
+            'lg:hidden relative h-6 w-6 flex flex-col justify-center gap-1.5',
+            'text-gray-300 hover:text-white transition-colors'
         )}
         onClick={onClick}
+        aria-label="Toggle menu"
     >
-        <span className="absolute left-1/2 top-1/2 block h-0.5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current" />
-        <span className="absolute left-1/2 top-1/2 block h-0.5 w-5 -translate-x-1/2 translate-y-1 rounded-full bg-current" />
+        <span className="h-0.5 w-full bg-current rounded-full transition-all" />
+        <span className="h-0.5 w-full bg-current rounded-full transition-all" />
+        <span className="h-0.5 w-full bg-current rounded-full transition-all" />
     </button>
-)
+))
 
-export const Header: React.FC<HeaderProps> = ({
-                                                  className,
-                                                  theme = 'light',
-                                                  isSticky = false,
-                                                  isStickyOverlay = false,
-                                                  withBorder = false,
-                                                  logo,
-                                                  menuItems = [],
-                                                  onThemeChange,
-                                                  rightContent,
-                                              }) => {
+MobileMenuButton.displayName = 'MobileMenuButton'
+
+interface LogoComponentProps {
+    logo: React.ReactNode | string
+    size?: 'sm' | 'md' | 'lg'
+}
+
+const LogoComponent = React.memo(({ logo, size = 'lg' }: LogoComponentProps) => {
+    const sizeMap = {
+        sm: { w: 32, h: 32 },
+        md: { w: 40, h: 40 },
+        lg: { w: 48, h: 48 }
+    }
+
+    const dimensions = sizeMap[size]
+
+    if (typeof logo === 'string') {
+        return (
+            <Image
+                src={logo}
+                alt="Company Logo"
+                width={dimensions.w}
+                height={dimensions.h}
+                priority={true}
+                className="object-contain"
+                sizes="(max-width: 768px) 32px, 40px"
+            />
+        )
+    }
+
+    return <div style={{ width: dimensions.w, height: dimensions.h }}>{logo}</div>
+})
+
+LogoComponent.displayName = 'LogoComponent'
+
+export const Header: React.FC<HeaderProps> = React.memo(({
+                                                             className,
+                                                             logo,
+                                                             logoSize = 'lg',
+                                                             menuItems = [],
+                                                             rightContent,
+                                                         }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
-    const isDarkTheme = theme === 'dark'
+
+    const toggleMobileMenu = React.useCallback(() => {
+        setIsMobileMenuOpen(prev => !prev)
+    }, [])
 
     return (
         <header
             className={clsx(
-                'relative z-40 w-full',
-                isSticky && 'sticky top-0',
-                isStickyOverlay && 'bg-white/80 backdrop-blur-md dark:bg-[#0B0C0F]/80',
-                withBorder && 'border-b border-gray-200 dark:border-[#16181D]',
+                'fixed top-0 left-0 right-0 z-50 w-full',
+                'bg-gray-900/95 backdrop-blur-sm',
+                'border-b border-gray-800',
                 className
             )}
         >
-            <div className="mx-auto max-w-[1760px] px-5 py-4">
-                <div className="flex items-center justify-between">
-                    {logo}
-                    <Navigation isDarkTheme={isDarkTheme} items={menuItems} />
-                    <div className="flex items-center gap-x-6">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6">
+                <div className="flex items-center justify-between h-16">
+                    {/* Logo */}
+                    {logo && (
+                        <div className="flex-shrink-0">
+                            <LogoComponent logo={logo} size={logoSize} />
+                        </div>
+                    )}
+
+                    {/* Navigation - тепер по центру */}
+                    <Navigation items={menuItems} />
+
+                    {/* Right Content */}
+                    <div className="flex items-center gap-x-3 ml-auto">
                         {rightContent}
-                        {onThemeChange && (
-                            <Button
-                                variant="default"
-                                onClick={onThemeChange}
-                            >
-                                {isDarkTheme ? '🌞' : '🌙'}
-                            </Button>
-                        )}
-                        <MobileMenuButton
-                            isDarkTheme={isDarkTheme}
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        />
+                        <MobileMenuButton onClick={toggleMobileMenu} />
                     </div>
                 </div>
             </div>
         </header>
     )
-}
+})
+
+Header.displayName = 'Header'
 
 export { Button }
-export default Header

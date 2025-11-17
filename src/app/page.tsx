@@ -1,4 +1,3 @@
-import { HeaderNav } from "@/components/Header-Nav";
 import FooterComponent from "@/components/Footer";
 import HeroDemo from "@/components/Hero";
 import Pricing from "@/components/ui/pricing-base";
@@ -8,6 +7,7 @@ import PortfolioSection from "@/components/Portfolio";
 import ProcessSection from "@/components/Process";
 import ServicesSection from "@/components/Services";
 import PremiumTestimonials from "@/components/ui/animated-testimonials";
+import HeaderNav from "@/components/Header-Nav";
 
 export default function Home() {
     return (

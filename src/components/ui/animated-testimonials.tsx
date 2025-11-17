@@ -197,19 +197,7 @@ function PremiumTestimonials() {
                     variants={fadeInUp}
                 >
                     <motion.div
-                        className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm mb-6"
-                        whileHover={{ scale: 1.05, borderColor: "rgba(255, 255, 255, 0.3)" }}
                     >
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                        >
-                            <Sparkles className="h-4 w-4 text-indigo-300" />
-                        </motion.div>
-                        <span className="text-sm font-medium text-white/80">
-                            ✨ Client Success Stories
-                        </span>
-                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                     </motion.div>
 
                     <motion.h2
@@ -217,7 +205,7 @@ function PremiumTestimonials() {
                         variants={fadeInUp}
                     >
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-                            Trusted by
+                            Довіра
                         </span>
                         <br />
                         <motion.span
@@ -234,7 +222,7 @@ function PremiumTestimonials() {
                                 backgroundSize: '200% 200%'
                             }}
                         >
-                            Industry Leaders
+                            Задоволених клієнтів
                         </motion.span>
                     </motion.h2>
 
@@ -242,7 +230,7 @@ function PremiumTestimonials() {
                         className="text-xl sm:text-2xl text-white/60 max-w-4xl mx-auto leading-relaxed"
                         variants={fadeInUp}
                     >
-                        Join thousands of businesses already transforming their operations with our premium AI solutions.
+                        Приєднуйтесь до десятків задоволених клієнтів.
                     </motion.p>
                 </motion.div>
 
