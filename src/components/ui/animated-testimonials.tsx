@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence, cubicBezier } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { Quote, Star, ArrowLeft, ArrowRight, Sparkles } from 'lucide-react';
+import { Quote, Star, ArrowLeft, ArrowRight} from 'lucide-react';
+import Image from "next/image";
 
 const testimonials = [
     {
@@ -288,7 +289,7 @@ function PremiumTestimonials() {
                                                 transition={{ duration: 0.3 }}
                                             >
                                                 <div className="w-24 h-24 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-white/20 relative">
-                                                    <img
+                                                    <Image
                                                         src={testimonials[currentIndex].avatar}
                                                         alt={testimonials[currentIndex].name}
                                                         className="w-full h-full object-cover"
