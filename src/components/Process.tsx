@@ -1,30 +1,30 @@
 ﻿'use client'
 
 import React from "react";
-import { Lightbulb, PenTool, Code2, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const steps = [
     {
-        icon: Lightbulb,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         number: "01",
         title: "Аналіз і планування",
         description: "Вивчаємо ваші потреби, цілі та аудиторію. Створюємо детальний план проєкту"
     },
     {
-        icon: PenTool,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         number: "02",
         title: "Дизайн",
         description: "Розробляємо унікальний дизайн, який відображає ідентичність вашого бренду"
     },
     {
-        icon: Code2,
+        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         number: "03",
         title: "Розробка",
         description: "Втілюємо дизайн у життя з використанням найсучасніших технологій"
     },
     {
-        icon: Rocket,
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         number: "04",
         title: "Запуск і підтримка",
         description: "Запускаємо проєкт і надаємо постійну підтримку для безперебійної роботи"
@@ -64,28 +64,35 @@ export default function ProcessSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="relative"
+                            className="relative group"
                         >
                             {/* Connector line */}
                             {index < steps.length - 1 && (
-                                <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-purple-500/50 to-transparent -z-10" />
+                                <div className="hidden lg:block absolute top-32 left-full w-full h-0.5 bg-gradient-to-r from-purple-500/50 to-transparent -z-10" />
                             )}
 
                             <div className="relative">
-                                <div className="absolute -top-4 -left-4 text-8xl font-bold text-white/5">
+                                <div className="absolute -top-4 -left-4 text-8xl font-bold text-white/5 z-0">
                                     {step.number}
                                 </div>
 
-                                <div className="relative bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-8 hover:from-white/15 hover:to-white/10 transition-all duration-300">
-                                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center mb-6">
-                                        <step.icon className="w-7 h-7 text-white" />
+                                <div className="relative bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-6 hover:from-white/15 hover:to-white/10 transition-all duration-300 overflow-hidden group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-purple-500/20">
+                                    {/* Image container */}
+                                    <div className="w-full h-32 rounded-xl mb-6 overflow-hidden relative">
+                                        <Image
+                                            src={step.image}
+                                            alt={step.title}
+                                            fill
+                                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                                     </div>
 
-                                    <h3 className="text-xl font-bold text-white mb-4">
+                                    <h3 className="text-xl font-bold text-white mb-4 relative z-10">
                                         {step.title}
                                     </h3>
 
-                                    <p className="text-gray-400 leading-relaxed">
+                                    <p className="text-gray-400 leading-relaxed relative z-10">
                                         {step.description}
                                     </p>
                                 </div>
