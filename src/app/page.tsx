@@ -8,7 +8,7 @@ import ProcessSection from "@/components/Process";
 import ServicesSection from "@/components/Services";
 import PremiumTestimonials from "@/components/ui/animated-testimonials";
 import HeaderNav from "@/components/Header-Nav";
-import FAQSection from "@/components/ui/FAQSection";
+import FAQSection from "@/components/FAQSection";
 
 export default function Home() {
     return (

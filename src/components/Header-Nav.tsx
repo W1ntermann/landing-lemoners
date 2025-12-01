@@ -1,6 +1,6 @@
 ﻿"use client"
 
-import { Button, Header } from "@/components/ui/navbar"
+import { Header } from "@/components/ui/navbar"
 
 const menuItems = [
     {
@@ -22,11 +22,6 @@ export default function HeaderNav() {
             logo="/logo-lemoners.jpg"
             logoSize="lg"
             menuItems={menuItems}
-            rightContent={
-                <div className="flex items-center gap-x-2">
-                    <Button className="text-xs">Розпочати</Button>
-                </div>
-            }
         />
     )
 }
